@@ -8,16 +8,24 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  word-wrap: break-word;
   z-index: 1;
   border-radius: 15px;
   position: relative;
   border: none;
 }
 
-.taskDescript {
+.taskName {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.taskDescription {
   font-weight: 500;
   font-size: 16px;
+  white-space: normal; /* allow wrapping of long text */
+  overflow-wrap: break-word; /* force breaking of long words */
+  word-break: break-all; /* break long words if needed */
+  /* text-align: left; optional: align text to left */
 }
 
 .taskTime {
