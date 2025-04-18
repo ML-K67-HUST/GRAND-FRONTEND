@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="static/TIMENEST-05.svg" />
+    <link rel="icon" type="image/svg+xml" href="../static/TIMENEST-05.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -17,7 +18,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="static/styles/style_main/style_main.css" />
+    <link rel="stylesheet" href="../static/styles/style_main/style_main.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 
@@ -31,286 +32,79 @@
   </head>
   <body>
     <div class="header">
-      <!-- top left logo -->
-      <div class="h-col-1">
-          <img id="logo" src="static/image/main/logo/TIMENEST-05 1 Black.svg" alt="timenest" style="height: 30px;">
-          <button class="menu" data-tooltip="Main menu" aria-label="button" role="button">
-              <img src="static/image/main/logo/sc-status-icon.svg" alt="menu button" style="height: 24px">
-          </button>
-      </div>
-      <!-- top right buttons -->
-      <div class="group-right">
-        <div class="undo-redo">
-            <button class="undo" data-tooltip="Undo" aria-label="button" role="button">
-                <img src="static/image/main/button/chevron-left.svg" alt="undo button" style="height: 20px">
-            </button>
-            <button class="redo" data-tooltip="Undo" aria-label="button" role="button">
-                <img src="static/image/main/button/chevron-right.svg" alt="redo button" style="height: 20px">
+        <!-- top left logo -->
+        <div class="h-col-1">
+            <img id="logo" src="../static/image/main/logo/TIMENEST-05 1 Black.svg" alt="timenest" style="height: 30px;">
+            <button id="toggleSidebar" class="menu" data-tooltip="Main menu" aria-label="button" role="button">
+                <img src="../static/image/main/logo/sc-status-icon.svg" alt="menu button" style="height: 24px">
             </button>
         </div>
-        <p id="workspace-display">{{username}}'s workspace</p>
-        <div class="rightmost">
-            <button class="theme" id="theme"><img src="static/image/main/button/editor-dot.svg" style="height: 26px"></button>
-            <button class="logout" id="logoutBtn" data-tooltip="Undo" aria-label="button" role="button">
-              <img src="static/image/main/button/clear.svg" alt="logout button" style="height: 18px">
-            </button>
+        <!-- top right buttons -->
+        <div class="group-right">
+          <div class="undo-redo">
+              <button class="undo" data-tooltip="Undo" aria-label="button" role="button">
+                  <img src="../static/image/main/button/chevron-left.svg" alt="undo button" style="height: 20px">
+              </button>
+              <button class="redo" data-tooltip="Undo" aria-label="button" role="button">
+                  <img src="../static/image/main/button/chevron-right.svg" alt="redo button" style="height: 20px">
+              </button>
+          </div>
+          <p id="workspace-display">{{username}}'s workspace</p>
+          <div class="rightmost">
+              <button class="theme" id="theme"><img src="../static/image/main/button/editor-dot.svg" style="height: 26px"></button>
+              <button class="logout" id="logoutBtn" data-tooltip="Undo" aria-label="button" role="button">
+                <img src="../static/image/main/button/clear.svg" alt="logout button" style="height: 18px">
+              </button>
+          </div>
         </div>
-      </div>
     </div>
-    <!-- left bar -->
     <div class="container">
-      <!-- Analysis -->
-      <div class="item item-1" id="item1">
-          <div class="upper">
-              <button id="toggleText"><h1>Analysis</h1></button>
-              <button id="toggleButton"><img src="static/image/main/analysis/expand.svg" style="width: 24px"></button>
-          </div>
-          <!-- chart -->
-          <div class="slide-container" id="slider">
-              <div class="slide-content" id="slideContent">
-                <!-- chart-1 -->
-                <div class="display-zone">
-                  <div class="chart chart-1">
-                      <h2>Progress Bar</h2>
-                      <div class="progress-bar week">
-                        <div class="info">
-                          <p>Week</p>
-                          <p class="progress-text">0%</p>
-                        </div>
-                        <div id="progress-container">
-                            <div id="progress-bar"></div>
-                        </div>
-                        
-                      </div>
-                      <div class="progress-bar month">
-                        <div class="info">
-                          <p>Month</p>
-                          <p class="progress-text">0%</p>
-                        </div>
-                        <div id="progress-container">
-                            <div id="progress-bar"></div>
-                        </div>
-                      </div>
-                      <div id="summary" style="display: none"></div>
-                  </div>
+        <div class="calendar-wrapper" id="calendarApp">
+            <!-- ============== SIDEBAR ============== -->
+            <aside class="sidebar" id="sidebar">
+                <div id="miniCalendar">
+                    
                 </div>
-                <!-- chart-2 -->
-                <div class="display-zone">
-                    <div class="chart chart-2">
-                        <h2>Tasks Distribution</h2>
-                        <button class="switch-hour">Switch</button>
-                        <div class="chart-2-container">
-                          <div class="chart-2-items number1">
-                            <div class="color color-1"></div>
-                            <div class="text text-1">Growth</div>
-                            <div class="percentage percentage-1">35%</div>
-                          </div>
-                          <div class="chart-2-items number2">
-                            <div class="color color-2"></div>
-                            <div class="text text-2">Growth</div>
-                            <div class="percentage percentage-2">35%</div>
-                          </div>
-                          <div class="chart-2-items number3">
-                            <div class="color color-3"></div>
-                            <div class="text text-3">Growth</div>
-                            <div class="percentage percentage-3">35%</div>
-                          </div>
-                          <div class="chart-2-items number4">
-                            <div class="color color-4"></div>
-                            <div class="text text-4">Growth</div>
-                            <div class="percentage percentage-4">35%</div>
-                          </div>
-                          <div class="chart-2-items number5">
-                            <div class="color color-5"></div>
-                            <div class="text text-5">Growth</div>
-                            <div class="percentage percentage-5">35%</div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- chart-3 -->
-                <div class="display-zone">
-                  <div class="chart chart-3">
-                      <h2>Priorities vs. Completion Rate</h2>
-                      <div class="chart-3-container">
-                        <div class="priority">
-                          <p class="title">Priority ranking</p>
-                          <div class="priority-ranking">
-                            <p id="p-most" class="most important"></p>
-                            <div id="priorityBar" class="priority-bar"></div>
-                            <p id="p-least" class="least important"></p>
-                          </div>
-                        </div>
-                        <div class="completion">
-                          <p class="title">Completion rate ranking</p>
-                          <div class="completion-ranking">
-                            <p id="c-most" class="most important"></p>
-                            <div id="completionBar" class="completion-bar"></div>
-                            <p id="c-least" class="least important"></p>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bottom-part">
-                  <button class="btn" id="prevButton"><img src="static/image/main/analysis/caret-left_w.svg" style="width: 20px"></button>
-                  <div class="dot-container" id="indicator"></div>
-                  <button class="btn" id="nextButton"><img src="static/image/main/analysis/caret-right_w.svg" style="width: 20px"></button>
-              </div>
-          </div>
-      </div>
-      <!-- Create button and chatbot -->
-      <div class="item item-2">
-          <!-- create button -->
-          <div class="div-create">
-            <button class="create" id="createBtn" aria-label="button" role="button">
-                <img src="static/image/main/button/fi-ss-add.svg" alt="plus" style="width: 50px">
-                <div class="create-text">Create</div>
-            </button>
-          </div>
-          <!-- create popup -->
-          <div id="createTaskModal" class="createTaskModal">
-            <div class="modal-content">
-              <span class="close-button">&times;</span>
-              <h2>Create New Task</h2>
-              <form id="createTaskForm">
-                Task Name: <input type="text" id="taskName" /><br />
-                Description: <textarea id="taskDescription"></textarea><br />
-                Start Time:
-                <input type="datetime-local" id="startTime" step="900" /><br />
-                End Time: <input type="datetime-local" id="endTime" /><br />
-                Task Color:
-                <input type="color" id="taskColor" value="#0000FF" /><br />
-                <button type="submit">Create Task</button>
-              </form>
+
+            </aside>
+
+            <!-- ============== MAIN ============== -->
+            <section class="calendar-main">
+                <!-- calendar -->
+                  
+            </section>
+
+        </div>
+        <div class="chatbot" id="chatbot">
+            <div class="chatbot-header" id="dragHandle">
+              <span>Timenest Bot</span>
+              <button class="close-btn" id="closeChatBtn">&times;</button>
             </div>
-          </div>
-          <!-- chatbot -->
-          <div class="chatbot">
-            <div class="chatbot-header">
-                <h1>Timenest</h1>
-            </div>
-            <div class="chat-window">
+            <div class="chatbot-body">
                 <div class="bot-message">
                     <p>Hi {{username}}! How can I help you today?</p>
                 </div>
             </div>
-            <div class="input-area">
-                <input type="text" placeholder="Type a message..." required>
-                <button class="send"><img src="static/image/main/button/Arrow 1.svg"></button>
-            </div>
-        </div>
-      </div>
-          <!-- Move this script to the end of the body -->
-      <!-- Khung hiển thị thông tin -->
-      <div id="taskInfo" class="task-info">
-        <div class="task-content">
-          <button id="closeButton" class="close-btn">x</button>
-          <button id="editButton" class="edit-btn">✎</button>
-          <button id="deleteButton" class="delete-btn">🗑️</button>
-          <h3 id="displayTaskName"></h3>
-          <p>
-            <strong>Description:</strong>
-            <span id="displayTaskDescription"></span>
-          </p>
-          <p><strong>From:</strong> <span id="displayFromDate"></span></p>
-          <p><strong>To:</strong> <span id="displayToDate"></span></p>
-          <p><strong>Duration:</strong> <span id="displayDuration"></span></p>
-          <p>
-            <strong>Status:</strong>
-            <select id="statusSelect">
-              <option value="In progress">In progress</option>
-              <option value="Pass due">Pass due</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </p>
-        </div>
-      </div>
-      <!-- calendar -->
-      <div class="item item-3">
-        <div class="calendar-zone">
-          <!-- calendar header -->
-          <div class="calendar-zone-top">
-            <div class="today">
-              <button id="btn-today"><p>Today</p></button>
-            </div>
-            <div class="day">
-              <button class="Previous_day" onclick="previousPeriod()">
-                <img src="static/image/main/navbar/Expand_left.svg"/>
-              </button>
-              <button class="Next_day" onclick="nextPeriod()">
-                <img src="static/image/main/navbar/Expand_right.svg" style="height: 23.849999px; width: 23.84px;"/>
-              </button>
-              <p>27.09.2024</p>
-            </div>
-
-            <div class="right">
-              <div class="view">
-                <button class="change-view">
-                  <span class="view-text">Week</span>
-                  <img src="static/image/main/navbar/fi-ss-caret-down.svg" />
-                </button>
-              </div>
-              <div class="dropdown-menu">
-                <button id="change-day" class="menu-option">Day</button>
-                <button id="change-week" class="menu-option">Week</button>
-                <button id="change-month" class="menu-option">Month</button>
-              </div>
-              <div class="search">
-                <button class="s">
-                  <img src="static/image/main/navbar/Date_range.svg" style="width: 2.5rem" />
-                </button>
-              </div>
-            </div>
+            <div class="chatbot-footer">
+               <!-- Image upload -->
+                <label class="icon-btn">
+                    <input type="file" accept="image/*" hidden>
+                    <span class="material-symbols-outlined">image</span>
+                </label>
             
-          </div>
+                <!-- Microphone -->
+                <button class="icon-btn" id="voiceBtn" aria-label="Speak">
+                    <span class="material-symbols-outlined">mic</span>
+                </button>
+            
+                <!-- Text box -->
+                <input type="text" placeholder="Type a message…" />
 
-          <!-- Calendar view -->
-          <div id ='calendar-container'></div>
+            </div>
         </div>
-        <!-- calendar footer -->
-        <div class="bottom">
-          <div class="option 1">
-            <button class="bttn-option 1">
-              <img src="static/image/main/footer/Add_round.svg" />
-            </button>
-          </div>
-          <div class="option 2">
-            <button class="bttn-option 2">
-              <img src="static/image/main/footer/Group_fill.svg" />
-            </button>
-          </div>
-          <div class="option 3">
-            <button class="bttn-option 3">
-              <img src="static/image/main/footer/Setting_alt_fill.svg" />
-            </button>
-          </div>
-        </div>
-      </div>
+        
     </div>
-    <script>
-      const socket = io();
-      socket.on('connect', () => {
-        console.log('Connected to server');
-      });
-      socket.on('new_data', (taskData) => {
-        console.log('WENT HEREEE');
-        console.log('taskData HEREEE', taskData);
-        addTaskToCalendarFromDB(taskData);
-      });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="static/js/analysis.js" defer></script>
-    <script src="static/js/utils.js" defer></script>
-    <script src="static/js/api.js" defer></script>
-    <script src="static/js/week_view.js" defer></script>
-    <script src="static/js/week_task.js" defer></script>
-    <script src="static/js/month_view.js" defer></script>
-    <script src="static/js/modal.js" defer></script> 
-    <script src="static/js/chatbot.js" defer></script>
-    <script src="static/js/progressTracker.js" defer></script>
-    <script src="static/js/functionality.js" defer></script>
-    <script src="static/js/main.js" defer></script>
+    <script src="../static/js/new_chatbot.js" defer></script>
+    <script src="../static/js/new_calendar.js" defer></script>
   </body>
 </html>

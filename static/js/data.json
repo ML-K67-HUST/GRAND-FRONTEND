@@ -2,13 +2,13 @@
     "task_completion": [
         {
             "time_period": "week",
-            "tasks_assigned": 10,
-            "tasks_completed": 7
+            "tasks_assigned": 0,
+            "tasks_completed": 0
         },
         {
             "time_period": "month",
-            "tasks_assigned": 40,
-            "tasks_completed": 30
+            "tasks_assigned": 0,
+            "tasks_completed": 0
         }
     ],
     "categories": [

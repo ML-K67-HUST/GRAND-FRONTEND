@@ -1,0 +1,191 @@
+.chatbot {
+    position:fixed; bottom:20px; right:20px;
+    width: 400px; height:680px; display:none; flex-direction:column;
+    background:#fff; border:1px solid #ddd; border-radius:20px;
+    box-shadow:0 6px 24px rgba(0,0,0,.1);
+}
+
+.chatbot-header   { cursor:move; background: var(--button-hover-color); color:#fff; padding:.75rem 1rem;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top-left-radius:10px; border-top-right-radius:10px; font-size: 18px; }
+
+.chatbot-body     { flex:1; padding:1rem; overflow:auto; display: flex; flex-direction: column; }
+.bot-message,
+.user-message {
+  max-width: 70%;
+  margin-bottom: 0.3rem;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+}
+
+.bot-message p,
+.user-message p {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 8px 10px;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+}
+
+.bot-message p {
+  background-color: #dee2e6;
+  border-radius: 15px 15px 15px 0;
+  align-self: flex-start;
+}
+
+.user-message p {
+  background-color: #4361ee;
+  color: white;
+  border-radius: 15px 15px 0 15px;
+  align-self: flex-end;
+}
+
+.bot-message {
+  align-self: flex-start;
+}
+
+.user-message {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.user-message .chat-img,
+.bot-message .chat-img {
+  margin-top: 4px;
+  max-width: 200px;
+  border-radius: 8px;
+  align-self: flex-end;
+}
+
+.bot-message .chat-img {
+  align-self: flex-start;
+}
+
+.chatbot-footer   { padding:0.5rem; border-top:1px solid #eee; }
+
+.close-btn        { background:none; border:none; font-size:1.5rem; color:#fff;
+    cursor:pointer; line-height:1; }
+
+/* ───────── Footer ───────── */
+.chatbot-footer {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem .7rem;
+  border-top: 1px solid #dcdfe6;
+}
+
+.chatbot-footer input[type="text"] {
+  flex: 1;
+  padding: .55rem .75rem;
+  font-size: 16px;
+  border: 1px solid #c6c9d1;
+  border-radius: 9px;
+  outline: none;
+}
+
+/* icon buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: #555;
+  display: flex;
+  align-items: center;
+  padding: .25rem;
+  border-radius: 50%;
+  transition: background .15s, color .15s;
+}
+.icon-btn:hover {
+  background: #e8f0fe;
+  color: #1967d2;
+}
+
+/* ensure hidden file‑input doesn't shift layout */
+.icon-btn input[type="file"] { display: none; }
+
+/* ───────── Scrollbar (optional, WebKit only) ───────── */
+.chatbot-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chatbot-body::-webkit-scrollbar-thumb {
+  background: #bcc0c7;
+  border-radius: 3px;
+}
+.chatbot-body::-webkit-scrollbar-thumb:hover {
+  background: #9da1a9;
+}
+
+/* smooth in / out */
+.chatbot {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;        /* ignore clicks when hidden */
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.chatbot.visible {             /* toggled by JS */
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.timestamp{
+  font-size: 12px;
+  color: hsla(0, 0%, 53%, 0.8);
+}
+
+.typing-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 60px;
+  padding: 5px 10px;
+}
+
+.typing-bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 60px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.typing-bubble .dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  background-color: #888;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: swing 1s infinite ease-in-out;
+}
+
+.typing-bubble .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-bubble .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-bubble .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

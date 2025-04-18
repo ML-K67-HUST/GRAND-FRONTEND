@@ -10,10 +10,6 @@
   overflow: hidden;
 }
 
-#calendar-container {
-  height: 900px;
-  overflow: hidden;
-}
 
 .calendar-zone-top {
   display: flex;
