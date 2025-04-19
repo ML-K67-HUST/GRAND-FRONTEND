@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calendar w/ Edit on Click</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/main.min.css" rel="stylesheet"/>
+  <style>
+    body { margin:0; padding:0; font-family:'Segoe UI',sans-serif; background:#f0f2f5; }
+    #calendar { max-width:900px; margin:40px auto; background:#fff; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);
+             align-items:center; justify-content:center; padding:1rem; box-sizing:border-box; z-index: 1000; }
+    .modal-content { background:#fff; border-radius:8px; padding:1.5rem; max-width:400px; width:100%;
+                     box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+    .modal-content h3 { margin-top:0; }
+    .modal-content label { display:block; margin:0.75rem 0 0.25rem; font-weight:500; }
+    .modal-content input, .modal-content textarea {
+      width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;
+    }
+    .modal-buttons { text-align:right; margin-top:1rem; }
+    .modal-buttons button { margin-left:0.5rem; padding:0.5rem 1rem; border:none; border-radius:4px;
+                            font-weight:500; cursor:pointer; }
+    .modal-buttons .save  { background:#3f51b5; color:#fff; }
+    .modal-buttons .cancel{ background:#aaa;   color:#fff; }
+  </style>
+</head>
+<body>
+
+  <div id="calendar"></div>
+
+  <!-- form modal -->
+  <div id="task-form" class="modal">
+    <div class="modal-content">
+      <h3 id="form-title">Create Task</h3>
+      <label for="task-title">Title</label>
+      <input type="text" id="task-title" />
+      <label for="task-desc">Description</label>
+      <textarea id="task-desc" rows="3"></textarea>
+      <div class="modal-buttons">
+        <button class="cancel" id="task-cancel">Cancel</button>
+        <button class="save"   id="task-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // grab elements
+      const calendarEl = document.getElementById('calendar');
+      const formModal  = document.getElementById('task-form');
+      const formTitle  = document.getElementById('form-title');
+      const inputTitle = document.getElementById('task-title');
+      const inputDesc  = document.getElementById('task-desc');
+      const btnSave    = document.getElementById('task-save');
+      const btnCancel  = document.getElementById('task-cancel');
+
+      let selectedRange = null;
+      let isEditing     = false;
+      let editingEvent  = null;
+
+      // init calendar
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView:  'timeGridWeek',
+        headerToolbar: {
+          left:  'prev today next',
+          center:'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        nowIndicator:  true,
+        selectable:    true,
+        selectMirror:  true,
+
+        // on new slot → show for create
+        select(info) {
+          isEditing      = false;
+          editingEvent   = null;
+          selectedRange  = info;
+          formTitle.textContent = 'Create Task';
+          inputTitle.value      = '';
+          inputDesc.value       = '';
+          formModal.style.display = 'flex';
+        },
+
+        // on click event → show for edit
+        eventClick(info) {
+          isEditing     = true;
+          editingEvent  = info.event;
+          selectedRange = {
+            start: editingEvent.start,
+            end:   editingEvent.end,
+            allDay: editingEvent.allDay
+          };
+          formTitle.textContent = 'Edit Task';
+          inputTitle.value      = editingEvent.title;
+          inputDesc.value       = editingEvent.extendedProps.description || '';
+          formModal.style.display = 'flex';
+        },
+
+        editable:     true,
+        slotMinTime:  '06:00:00',
+        slotMaxTime:  '22:00:00',
+        slotDuration: '01:00:00'
+      });
+
+      calendar.render();
+
+      // Save handler
+      btnSave.addEventListener('click', () => {
+        const title = inputTitle.value.trim();
+        const desc  = inputDesc.value.trim();
+        if (!title) {
+          alert('Please enter a title.');
+          return;
+        }
+
+        if (isEditing && editingEvent) {
+          // update existing
+          editingEvent.setProp('title', title);
+          editingEvent.setDates(
+            selectedRange.start,
+            selectedRange.end,
+            { maintainDuration: false }
+          );
+          editingEvent.setExtendedProp('description', desc);
+        } else {
+          // create new
+          calendar.addEvent({
+            title,
+            start: selectedRange.start,
+            end:   selectedRange.end,
+            allDay: selectedRange.allDay,
+            extendedProps: { description: desc }
+          });
+        }
+
+        // hide & reset
+        formModal.style.display = 'none';
+        calendar.unselect();
+        isEditing    = false;
+        editingEvent = null;
+      });
+
+      // Cancel handler
+      btnCancel.addEventListener('click', () => {
+        formModal.style.display = 'none';
+        calendar.unselect();
+      });
+    });
+  </script>
+</body>
+</html>

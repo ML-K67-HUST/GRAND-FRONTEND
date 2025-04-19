@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/main.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -40,22 +41,12 @@
             </button>
         </div>
         <!-- top right buttons -->
-        <div class="group-right">
-          <div class="undo-redo">
-              <button class="undo" data-tooltip="Undo" aria-label="button" role="button">
-                  <img src="../static/image/main/button/chevron-left.svg" alt="undo button" style="height: 20px">
-              </button>
-              <button class="redo" data-tooltip="Undo" aria-label="button" role="button">
-                  <img src="../static/image/main/button/chevron-right.svg" alt="redo button" style="height: 20px">
-              </button>
-          </div>
-          <p id="workspace-display">{{username}}'s workspace</p>
-          <div class="rightmost">
-              <button class="theme" id="theme"><img src="../static/image/main/button/editor-dot.svg" style="height: 26px"></button>
-              <button class="logout" id="logoutBtn" data-tooltip="Undo" aria-label="button" role="button">
-                <img src="../static/image/main/button/clear.svg" alt="logout button" style="height: 18px">
-              </button>
-          </div>
+        <p id="workspace-display">{{username}}'s workspace</p>
+        <div class="rightmost">
+            <button class="theme" id="theme"><img src="../static/image/main/button/editor-dot.svg" style="height: 26px"></button>
+            <button class="logout" id="logoutBtn" data-tooltip="Undo" aria-label="button" role="button">
+              <img src="../static/image/main/button/clear.svg" alt="logout button" style="height: 18px">
+            </button>
         </div>
     </div>
     <div class="container">
@@ -69,11 +60,66 @@
             </aside>
 
             <!-- ============== MAIN ============== -->
-            <section class="calendar-main">
-                <!-- calendar -->
-                  
-            </section>
+            <div id="calendar">
+              
+            </div>
+              <!-- form modal -->
+            <div id="task-form" class="modal">
+              <div class="modal-content">
+                <h3 id="form-title">Create Task</h3>
+                
+                <label for="task-title">Task Name</label>
+                <input type="text" id="task-title" placeholder="Enter task name" />
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="task-start">Start Time</label>
+                    <input type="datetime-local" id="task-start" />
+                  </div>
+                  <div class="form-group">
+                    <label for="task-end">End Time</label>
+                    <input type="datetime-local" id="task-end" />
+                  </div>
+                </div>
 
+                <label for="task-group">Task Group</label>
+                <div class="task-group-selector">
+                  <div class="task-group-option" data-group="growth">
+                    <span class="color-dot" style="background-color: #a0e7e5;"></span>
+                    <span>Growth</span>
+                  </div>
+                  <div class="task-group-option" data-group="wellness">
+                    <span class="color-dot" style="background-color: #b4f8c8;"></span>
+                    <span>Wellness</span>
+                  </div>
+                  <div class="task-group-option" data-group="social">
+                    <span class="color-dot" style="background-color: #ffaebc;"></span>
+                    <span>Social</span>
+                  </div>
+                  <div class="task-group-option" data-group="family">
+                    <span class="color-dot" style="background-color: #fbe7c6;"></span>
+                    <span>Family</span>
+                  </div>
+                  <div class="task-group-option" data-group="career">
+                    <span class="color-dot" style="background-color: #b4c8ff;"></span>
+                    <span>Career</span>
+                  </div>
+                  <div class="task-group-option" data-group="other">
+                    <span class="color-dot" style="background-color: #e7e7e7;"></span>
+                    <span>Other</span>
+                  </div>
+                </div>
+                <input type="hidden" id="task-group-value" value="other" />
+                
+                <label for="task-desc">Description</label>
+                <textarea id="task-desc" rows="3" placeholder="Enter task description"></textarea>
+                
+                <div class="modal-buttons">
+                  <button class="cancel" id="task-cancel">Cancel</button>
+                  <button class="save"   id="task-save">Save</button>
+                </div>
+              </div>
+            </div>
         </div>
         <div class="chatbot" id="chatbot">
             <div class="chatbot-header" id="dragHandle">
@@ -106,5 +152,7 @@
     </div>
     <script src="../static/js/new_chatbot.js" defer></script>
     <script src="../static/js/new_calendar.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+
   </body>
 </html>

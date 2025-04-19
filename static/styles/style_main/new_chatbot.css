@@ -3,6 +3,7 @@
     width: 400px; height:680px; display:none; flex-direction:column;
     background:#fff; border:1px solid #ddd; border-radius:20px;
     box-shadow:0 6px 24px rgba(0,0,0,.1);
+    z-index: 9999;
 }
 
 .chatbot-header   { cursor:move; background: var(--button-hover-color); color:#fff; padding:.75rem 1rem;
