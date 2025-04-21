@@ -1,0 +1,28 @@
+<!-- Add this button where you want it to appear in your UI -->
+<button id="update-analysis-btn" class="update-analysis-btn">
+  Update Analysis
+</button>
+
+<!-- CSS for the button - Add to your CSS file -->
+<style>
+.update-analysis-btn {
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-analysis-btn:hover {
+  background-color: var(--button-hover-color);
+}
+
+.update-analysis-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+</style> 
