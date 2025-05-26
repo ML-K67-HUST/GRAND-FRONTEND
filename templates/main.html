@@ -24,11 +24,14 @@
 
 
     <script>
+      // Truyền biến backend_url cho JS tĩnh
+      window.BACKEND_URL = "{{ backend_url }}";
+      window.AGENT_URL = "{{ agent_url }}";
       const USERID = '{{userid}}'; // This assumes the userID is passed from the Python script
       console.log("userid: ",USERID)
       const USERNAME = '{{username}}';
       // const evtSource = new EventSource("/stream");
-      const ws = new WebSocket("wss://grand-backend.fly.dev/ws");
+      const ws = new WebSocket("ws://"+"{{ backend_url }}".replace("http://", "")+"/ws");
 
       ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -221,9 +224,19 @@
                     <p>Hi {{username}}! How can I help you today?</p>
                 </div>
             </div>
-            <div class="input-area">
-                <input type="text" placeholder="Type a message..." required>
-                <button class="send"><img src="static/image/main/button/Arrow 1.svg"></button>
+            <div class="input-container">
+              <div id="image-preview" class="image-preview" style="display: none;">
+                  <img id="preview-image" src="" alt="Preview">
+                  <button id="remove-image" class="remove-image">×</button>
+              </div>
+              <div class="input-area">
+                  <input type="text" placeholder="Type a message..." required>
+                  <label for="image-upload" class="upload-btn">
+                      <img src="static/image/main/button/image-upload.svg" alt="Upload" title="Upload Image">
+                  </label>
+                  <input type="file" id="image-upload" accept="image/*" style="display: none">
+                  <button class="send"><img src="static/image/main/button/Arrow 1.svg"></button>
+              </div>
             </div>
           </div>
       </div>

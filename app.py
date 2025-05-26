@@ -8,11 +8,22 @@ app = Flask(__name__)
 
 security_on = False
 
-BACKEND_URL = "https://grand-backend.fly.dev/"
+BACKEND_URL = "http://localhost:5050"
+AGENT_URL = "http://localhost:5001"
+# BACKEND_URL = "https://grand-backend.fly.dev/"
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    backend_error = None
+    # try:
+    #     response = requests.get(f"{BACKEND_URL}/health_check/", timeout=10)
+    #     print(response.status_code)
+    #     if response.status_code != 200:
+    #         backend_error = 'Không thể kết nối tới backend, ứng dụng tạm thời ngừng hoạt động'
+    # except Exception as e:
+    #     print(f'Lỗi kết nối backend: {e}')
+    #     backend_error = 'Không thể kết nối tới backend, ứng dụng tạm thời ngừng hoạt động'
+    return render_template('index.html', backend_error=backend_error)
 
 @app.route('/info')
 def info():
@@ -22,8 +33,7 @@ def info():
 
 @app.route('/create-account')
 def create_account_page():
-    
-    return render_template('login.html')
+    return render_template('login.html', backend_url=BACKEND_URL)
 
 @app.route('/calendar')
 def render_calendar():
@@ -54,13 +64,13 @@ def render_calendar():
                 print(user)
                 if user:
                     username = user['full_name']
-                return render_template('main.html', username=username, userid=userid)
+                return render_template('main.html', username=username, userid=userid, backend_url=BACKEND_URL)
             else:
                 print('ACCESS TOKEN EXPIRED')
                 refresh_token = request.cookies.get('refresh_token')
                 if not refresh_token:
                     print('REFRESS TOKEN KO CO')
-                    return render_template('login.html')
+                    return render_template('login.html', backend_url=BACKEND_URL)
                 
                 response = requests.request("GET", 
                     url=f"{BACKEND_URL}/authorization/verify-token/", 
@@ -74,12 +84,12 @@ def render_calendar():
                 )
                 if response.status_code != 200:
                     print('KO VERIFY DC REFRESH TOKEN')
-                    return render_template('login.html')
+                    return render_template('login.html', backend_url=BACKEND_URL)
             
                 new_access_token = response.json()['access_token']
                 new_refresh_token = response.json()['refresh_token']
 
-                response_html = make_response(render_template('main.html', username=username))
+                response_html = make_response(render_template('main.html', username=username, backend_url=BACKEND_URL))
 
                 response_html.set_cookie("access_token", new_access_token, httponly=True, secure=True)
                 response_html.set_cookie("refresh_token", new_refresh_token, httponly=True, secure=True)
@@ -89,12 +99,12 @@ def render_calendar():
             username = request.args.get('username', 'Guest')
             userid = request.args.get('userid',1)
             # access_token = request.cookies.get('access_token')
-            return render_template('main.html', username=username, userid=userid)
+            return render_template('main.html', username=username, userid=userid, backend_url=BACKEND_URL, agent_url=AGENT_URL)
 
                 
     except Exception as e:
         print(f'Can not authorize, exception : {e}')
-        return render_template('login.html')
+        return render_template('login.html', backend_url=BACKEND_URL)
 
 @app.route('/week_view')
 def render_week_view():

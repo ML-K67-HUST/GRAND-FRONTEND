@@ -813,7 +813,7 @@ document.addEventListener('DOMContentLoaded', function () {
       addTypingIndicator();
   
       try {
-        const response = await fetch('https://time-management-agent-production.up.railway.app/chat/chat_completion', {
+        const response = await fetch(window.AGENT_URL +'/chat/chat_completion', {
           method: 'POST',
           headers: {
             'accept': 'application/json',

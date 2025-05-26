@@ -22,6 +22,15 @@
   </head>
 
   <body>
+    {% if backend_error %}
+    <div id="backendModal" style="display:block;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:16px;box-shadow:0 4px 32px rgba(176,0,32,0.15);padding:36px 32px 28px 32px;max-width:90vw;width:420px;text-align:center;font-family:'Outfit','Poppins','Catamaran',Arial,sans-serif;">
+        <button onclick="document.getElementById('backendModal').style.display='none'" style="position:absolute;top:12px;right:18px;background:none;border:none;font-size:1.7em;color:#b00020;cursor:pointer;line-height:1;">&times;</button>
+        <div style="margin-bottom:18px;"><i class="fa fa-exclamation-triangle" style="font-size:2.5em;color:#b00020;"></i></div>
+        <div style="color:#b00020;font-weight:600;font-size:1.18em;letter-spacing:0.01em;">{{ backend_error }}</div>
+      </div>
+    </div>
+    {% endif %}
     <div class="partone">
       <header>
         <nav class="nav-bar" id="navbar">
@@ -88,27 +97,27 @@
       <div class="scroller" data-speed="fast">
         <ul class="tag-list scroller__inner">
           <li>
-            <p>“Timenest is a great name."</p>
+            <p>"Timenest is a great name."</p>
             <i class="fa-brands fa-github" style="color: #3148e6"></i>
           </li>
           <li>
-            <p>“We never knew we need this."</p>
+            <p>"We never knew we need this."</p>
             <i class="fa-brands fa-facebook" style="color: #3148e6"></i>
           </li>
           <li>
-            <p>“We freak out because it's so good.”</p>
+            <p>"We freak out because it's so good."</p>
             <i class="fa-brands fa-medium" style="color: #3148e6"></i>
           </li>
           <li>
-            <p>“I need Premium Plan.”</p>
+            <p>"I need Premium Plan."</p>
             <i class="fa-brands fa-discord" style="color: #3148e6"></i>
           </li>
           <li>
-            <p>“We hope we get this sooner.”</p>
+            <p>"We hope we get this sooner."</p>
             <i class="fa-brands fa-telegram" style="color: #3148e6"></i>
           </li>
           <li>
-            <p>“Award-winning website, no doubt.”</p>
+            <p>"Award-winning website, no doubt."</p>
             <i class="fa-brands fa-apple" style="color: #3148e6"></i>
           </li>
         </ul>

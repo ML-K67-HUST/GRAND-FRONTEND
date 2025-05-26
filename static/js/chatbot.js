@@ -55,7 +55,7 @@ async function handleUserInput() {
     addTypingIndicator();
 
     try {
-      const response = await fetch('https://time-management-agent-production.up.railway.app/chat/chat_completion', {
+      const response = await fetch(window.AGENT_URL +'/chat/chat_completion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ function loadConversation(user_id) {
   const chatWindow = document.querySelector('.chat-window');
   chatWindow.innerHTML = ''; // Clear existing messages
 
-  fetch('https://grand-backend.fly.dev/conversation/query', {
+  fetch(window.BACKEND_URL +'/conversation/query', {
     method: 'POST',
     headers: {
       'accept': 'application/json',

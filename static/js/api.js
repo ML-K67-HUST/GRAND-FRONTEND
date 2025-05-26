@@ -9,7 +9,7 @@ function addTask(taskData) {
 
   console.log("data add task: ")
   console.log(taskData)
-  return fetch('https://grand-backend.fly.dev/sqldb/tasks/', {
+  return fetch(window.BACKEND_URL + '/sqldb/tasks/', {
     method: 'POST',
     headers: {
       'accept': 'application/json',
@@ -46,7 +46,7 @@ function deleteTask(taskData) {
   const userid = taskData.userid;
   const taskid = taskData.taskid;
   console.log("task to delete")
-  return fetch(`https://grand-backend.fly.dev/sqldb/tasks/${userid}/${taskid}`, {
+  return fetch(`${window.BACKEND_URL}/sqldb/tasks/${userid}/${taskid}`, {
     method: 'DELETE',
     headers: {
       'accept': 'application/json'
@@ -64,7 +64,7 @@ function deleteTask(taskData) {
 
 function getUserTasks() {
   userid = USERID
-  return fetch(`https://grand-backend.fly.dev/sqldb/tasks/${userid}`, {
+  return fetch(`${window.BACKEND_URL}/sqldb/tasks/${userid}`, {
     method: 'GET',
     headers: {
       'accept': 'application/json',
@@ -82,7 +82,7 @@ function getUserTasks() {
 }
 
 function updateTaskStatus(taskid, newStatus) {
-  return fetch(`https://grand-backend.fly.dev/sqldb/tasks/${USERID}/${taskid}`, {
+  return fetch(`${window.BACKEND_URL}/sqldb/tasks/${USERID}/${taskid}`, {
     method: 'PUT',
     headers: {
       'accept': 'application/json',
