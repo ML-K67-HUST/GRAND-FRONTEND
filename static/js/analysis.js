@@ -561,10 +561,14 @@ theme.onclick = function(){
   document.body.classList.toggle('pink-theme')
 }
 
+import { calculateTaskAnalytics } from './analysis_helper';
+
 async function fetchData() {
     try {
-        const response = await fetch('static/js/data.json'); // Adjust the path if necessary
-        const data = await response.json();
+        const response = await fetch('static/js/data_2.json'); // Adjust the path if necessary
+        const dataFirst = await response.json();
+        const data = calculateTaskAnalytics(dataFirst);
+        console.log('Fetched and processed data:', data);
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
