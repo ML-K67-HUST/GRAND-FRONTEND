@@ -2,6 +2,16 @@ function convertToTimestamp(isoString) {
   const date = new Date(isoString);
   return Math.floor(date.getTime() / 1000); 
 }
+
+function convertTimestampToDateTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hour}:${minute}`;
+}
 function addTask(taskData) {
   taskData.startTime = convertToTimestamp(taskData.startTime)
   taskData.endTime = convertToTimestamp(taskData.endTime)
@@ -55,6 +65,12 @@ function deleteTask(taskData) {
     .then((response) => response.json())
     .then((data) => {
       console.log('Delete success:', data);
+      
+      // Remove task from global tasksData
+      if (typeof tasksData !== 'undefined') {
+        tasksData = tasksData.filter(task => task.taskid !== taskid);
+      }
+      
       getUserTasks();
     })
     .catch((error) => {
@@ -73,7 +89,20 @@ function getUserTasks() {
   .then((response) => response.json())
   .then((data) => {
     console.log('Fetched tasks:', data.tasks);
-    return data.tasks || [];
+    const tasks = data.tasks || [];
+    
+    // Update global tasksData if it exists
+    if (typeof tasksData !== 'undefined') {
+      tasksData = tasks.map(task => ({
+        ...task,
+        startTime: convertTimestampToDateTime ? convertTimestampToDateTime(task.start_time) : task.start_time,
+        endTime: convertTimestampToDateTime ? convertTimestampToDateTime(task.end_time) : task.end_time,
+        taskName: task.task_name,
+        taskDescription: task.task_description
+      }));
+    }
+    
+    return tasks;
   })
   .catch((error) => {
     console.error('Error fetching tasks:', error);

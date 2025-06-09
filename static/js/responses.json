@@ -1,11 +1,11 @@
 {
   "progress": {
-    "response": "Be patient, your insight will be updated each 30 minutes. Stay tuned!"
+    "response": "You did great this week! Your task completion rate has increased to 67%, which is higher than your monthly average of 50%. This suggests you're planning more realistically and focusing better on your set goals. Keep up the great work!"
   },
   "tasks": {
-    "response": "Be patient, your insight will be updated each 30 minutes. Stay tuned!"
+    "response": "The analysis shows you are dedicating most of your time and energy to your 'Career' and 'Growth' goals, which is a very positive signal for your professional development. However, remember that the 'Wellness' and 'Family' domains are also important for recharging. Perhaps you'd like to add a small relaxing activity to your schedule for next week?"
   },
   "priority-completion": {
-    "response": "Be patient, your insight will be updated each 30 minutes. Stay tuned!"
+    "response": "Excellent! The data shows you're successfully completing high-priority tasks in the 'Career' and 'Growth' domains. Here's an interesting observation: you seem to complete 'Social' activities at a higher rate than the priority you assign them. This might suggest that social activities give you more energy than you realize. Consider leveraging these connections to also support your career goals!"
   }
 }

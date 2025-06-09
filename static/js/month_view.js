@@ -323,8 +323,7 @@ function renderCalendar(year, month) {
 }   
 
 function addTaskToMonthCalendar(taskData) {
-    // Add the new task to the global tasksData array if not already present.
-    // (Use this if your tasksData source is mutable.)
+    // Add the new task to the global tasksData array
     tasksData.push(taskData);
   
     // Get the task's date (normalized to midnight).

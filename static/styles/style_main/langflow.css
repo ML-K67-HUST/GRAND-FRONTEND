@@ -1,0 +1,25 @@
+/* Langflow Chat Component Styling */
+langflow-chat {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 1000 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Ensure the chat doesn't interfere with other elements */
+langflow-chat * {
+  box-sizing: border-box;
+}
+
+/* Optional: Add some responsive behavior */
+@media (max-width: 768px) {
+  langflow-chat {
+    bottom: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+  }
+} 

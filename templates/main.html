@@ -21,7 +21,9 @@
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+    <!-- Langflow Chat Component -->
+    <script src="https://unpkg.com/langflow-embedded-chat@1.0.5/dist/build/static/js/bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/langflow-embedded-chat@1.0.5/dist/build/static/css/style.min.css">
 
     <script>
       // Truyền biến backend_url cho JS tĩnh
@@ -38,6 +40,17 @@
         if (data.type === "TASK_ADDED") {
           console.log("ADD TASK TRIGGERED") // or whatever
           console.log("TASK DAY ", data.task)
+          
+          // Update the global tasksData array
+          const newTask = {
+            ...data.task,
+            startTime: convertTimestampToDateTime(data.task.start_time),
+            endTime: convertTimestampToDateTime(data.task.end_time),
+            taskName: data.task.task_name,
+            taskDescription: data.task.task_description
+          };
+          tasksData.push(newTask);
+          
           addTaskFromDB(data.task);
           console.log("LOADED")
         }
@@ -231,9 +244,9 @@
               </div>
               <div class="input-area">
                   <input type="text" placeholder="Type a message..." required>
-                  <label for="image-upload" class="upload-btn">
+                  <!-- <label for="image-upload" class="upload-btn">
                       <img src="static/image/main/button/image-upload.svg" alt="Upload" title="Upload Image">
-                  </label>
+                  </label> -->
                   <input type="file" id="image-upload" accept="image/*" style="display: none">
                   <button class="send"><img src="static/image/main/button/Arrow 1.svg"></button>
               </div>
@@ -323,6 +336,7 @@
         </div>
       </div>
     </div>
+    
     <!-- <script>
       const socket = io();
       socket.on('connect', () => {

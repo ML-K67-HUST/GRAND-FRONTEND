@@ -1,10 +1,21 @@
 
 let currentView = 'week-view';
+let tasksData = []; // Global variable to store tasks data
 
 document.addEventListener('DOMContentLoaded', function () {
   getUserTasks().then((tasks) => {
     console.log("tasks from api ");
     console.log(tasks);
+    
+    // Convert and store tasks in the global tasksData variable
+    tasksData = tasks.map(task => ({
+      ...task,
+      startTime: convertTimestampToDateTime(task.start_time),
+      endTime: convertTimestampToDateTime(task.end_time),
+      taskName: task.task_name,
+      taskDescription: task.task_description
+    }));
+    
     addTaskFromDB(tasks);
   });
   changeWeekView();
