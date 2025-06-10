@@ -1,22 +1,149 @@
-
 {
-    "task_completion": [
-        {
-            "time_period": "week",
-            "tasks_assigned": 6,
-            "tasks_completed": 4
-        },
-        {
-            "time_period": "month",
-            "tasks_assigned": 8,
-            "tasks_completed": 4
-        }
-    ],
-    "categories": [
-        ["Growth", 15, 2, 70, 1.4],
-        ["Wellness", 40, 4, 30, 2.3],
-        ["Social", 15, 3, 55, 2.5],
-        ["Family", 15, 3, 60, 1.8],
-        ["Career", 15, 2, 80, 2.8]
-      ]
+  "userid": "1",
+  "tasks": [
+    {
+      "userid": 1,
+      "taskid": "a18bcf78-7dee-4042-ab10-26aceb3037ec",
+      "task_name": "go swimming",
+      "task_description": "with families",
+      "color": "#a084ca",
+      "start_time": 1749465000,
+      "end_time": 1749475800,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Family"
+    },
+    {
+      "userid": 1,
+      "taskid": "4fb30669-0dc2-46cd-beff-c161a989c458",
+      "task_name": "studying nlp",
+      "task_description": "for final exam",
+      "color": "#6a8eae",
+      "start_time": 1749477600,
+      "end_time": 1749484800,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Growth"
+    },
+    {
+      "userid": 1,
+      "taskid": "17eec8ec-9cb9-4a6f-82f6-c4dbaf7d3b3f",
+      "task_name": "football",
+      "task_description": "with john",
+      "color": "#a084ca",
+      "start_time": 1749639600,
+      "end_time": 1749648600,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Social"
+    },
+    {
+      "userid": 1,
+      "taskid": "38d84399-2ccd-4ff5-8153-78c650174776",
+      "task_name": "football",
+      "task_description": "with john",
+      "color": "#6a8eae",
+      "start_time": 1749639600,
+      "end_time": 1749648600,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Social"
+    },
+    {
+      "userid": 1,
+      "taskid": "28e7d466-fd98-4b82-b5b0-e6318d157b78",
+      "task_name": "football",
+      "task_description": "with john",
+      "color": "#f78fb3",
+      "start_time": 1749639600,
+      "end_time": 1749648600,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Social"
+    },
+    {
+      "userid": 1,
+      "taskid": "db340e2c-d05b-4537-a237-9f87152d3e12",
+      "task_name": "study nlp",
+      "task_description": "",
+      "color": "#0000ff",
+      "start_time": 1763042400,
+      "end_time": 1763049600,
+      "status": "pending",
+      "priority": 0,
+      "task_type": "Career"
+    },
+    {
+      "userid": 1,
+      "taskid": "7a967851-a3f1-4359-8e89-999e1f6b3ee9",
+      "task_name": "hit the gym",
+      "task_description": "with friends",
+      "color": "#a084ca",
+      "start_time": 1749809700,
+      "end_time": 1749817800,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Wellness"
+    },
+    {
+      "userid": 1,
+      "taskid": "575c264a-5ad1-405b-ae0a-42de76d7bca9",
+      "task_name": "studying nlp",
+      "task_description": "",
+      "color": "#0000ff",
+      "start_time": 1749553200,
+      "end_time": 1749560400,
+      "status": "pending",
+      "priority": 0,
+      "task_type": "Growth"
+    },
+    {
+      "userid": 1,
+      "taskid": "06e7b843-ea14-4d0b-8949-95e1be2a8436",
+      "task_name": "go camping",
+      "task_description": "",
+      "color": "#56cc9d",
+      "start_time": 1749821400,
+      "end_time": 1749828600,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Wellness"
+    },
+    {
+      "userid": 1,
+      "taskid": "67276b18-2cd2-4756-a6c8-655c66be2136",
+      "task_name": "demo NLP ",
+      "task_description": "",
+      "color": "#f4a261",
+      "start_time": 1749384000,
+      "end_time": 1749391200,
+      "status": "In Progress",
+      "priority": 0,
+      "task_type": "Career"
+    },
+    {
+      "userid": 1,
+      "taskid": "4d33d059-8819-4f10-ba45-38fb29a1ef19",
+      "task_name": "hit the gym",
+      "task_description": "with James\n",
+      "color": "#a084ca",
+      "start_time": 1749731400,
+      "end_time": 1749738600,
+      "status": "Done",
+      "priority": 0,
+      "task_type": "Wellness"
+    },
+    {
+      "userid": 1,
+      "taskid": "601da2f4-d1c9-4d41-a582-56612dbec848",
+      "task_name": "studying nlp",
+      "task_description": "",
+      "color": "#0000ff",
+      "start_time": 1749564000,
+      "end_time": 1749571200,
+      "status": "Done",
+      "priority": 0,
+      "task_type": "Growth"
+    }
+  ]
 }
